@@ -18,6 +18,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     private boolean right = false;
     private boolean up = false;
     private boolean down = false;
+    private boolean collisionDetected = false;
 
     private ImageIcon rightMouth;
     private ImageIcon leftMouth;
@@ -136,6 +137,8 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
                 g.setFont(new Font("arial", Font.BOLD, 50));
                 g.drawString("Press Spacebar to Try Again", 100, 360);
+
+                collisionDetected = true;
             }
         }
 
@@ -217,7 +220,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-
+        //LEAVE EMPTY
     }
 
     @Override
@@ -226,40 +229,47 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
             moves = 0;
             score = 0;
             snakeLength = 3;
-            repaint();
-        }
-        if(e.getKeyCode() == KeyEvent.VK_RIGHT && !left) {
-            moves++;
+            collisionDetected = false;
             right = true;
             left = false;
             up = false;
             down = false;
+            repaint();
         }
-        if(e.getKeyCode() == KeyEvent.VK_LEFT && !right) {
-            moves++;
-            right = false;
-            left = true;
-            up = false;
-            down = false;
-        }
-        if(e.getKeyCode() == KeyEvent.VK_UP && !down) {
-            moves++;
-            right = false;
-            left = false;
-            up = true;
-            down = false;
-        }
-        if(e.getKeyCode() == KeyEvent.VK_DOWN && !up) {
-            moves++;
-            right = false;
-            left = false;
-            up = false;
-            down = true;
+        if (!collisionDetected) {
+            if(e.getKeyCode() == KeyEvent.VK_RIGHT && !left) {
+                moves++;
+                right = true;
+                left = false;
+                up = false;
+                down = false;
+            }
+            if(e.getKeyCode() == KeyEvent.VK_LEFT && !right) {
+                moves++;
+                right = false;
+                left = true;
+                up = false;
+                down = false;
+            }
+            if(e.getKeyCode() == KeyEvent.VK_UP && !down) {
+                moves++;
+                right = false;
+                left = false;
+                up = true;
+                down = false;
+            }
+            if(e.getKeyCode() == KeyEvent.VK_DOWN && !up) {
+                moves++;
+                right = false;
+                left = false;
+                up = false;
+                down = true;
+            }
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+        //LEAVE EMPTY
     }
 }
