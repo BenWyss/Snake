@@ -8,45 +8,48 @@ import java.util.Random;
 
 public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
+    /* Instance Variables */
+    //Random and Timer
+    private Random random = new Random();
+    private Timer timer;
+
+    //Integer Arrays
     private int[] snakeXLength = new int[750];
     private int[] snakeYLength = new int[750];
+    private int[] foodXPos = {
+            25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 475, 500, 525, 550,
+            575, 600, 625, 650, 675, 700, 725, 750, 775, 800, 825, 850
+    }; //All possible X-Positions of the Food on the Panel
+    private int[] foodYPos = {
+            75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 475, 500, 525, 550,
+            575, 600, 625
+    }; //All possible Y-Positions of the Food on the Panel
 
-    private int snakeLength = 3;
+    //Integers
+    private int snakeLength = 3; //Starting Length of the Snake = 3
     private int moves = 0;
+    private int xPos = random.nextInt(foodXPos.length);
+    private int yPos = random.nextInt(foodYPos.length);
+    private int delay = 100;
+    private int score = 0;
 
-    private boolean left = false;
-    private boolean right = false;
-    private boolean up = false;
-    private boolean down = false;
-    private boolean collisionDetected = false;
+    //Booleans
+    private boolean left = false; //Left Direction
+    private boolean right = false; //Right Direction
+    private boolean up = false; // Up Direction
+    private boolean down = false; //Down Direction
+    private boolean collisionDetected = false; //Self Collision (True or False)
 
+    //ImageIcons
     private ImageIcon rightMouth;
     private ImageIcon leftMouth;
     private ImageIcon upMouth;
     private ImageIcon downMouth;
     private ImageIcon snakeImage;
     private ImageIcon titleImage;
-
-    private int[] foodXPos = {
-            25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 475, 500, 525, 550,
-            575, 600, 625, 650, 675, 700, 725, 750, 775, 800, 825, 850
-    };
-    private int[] foodYPos = {
-            75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 475, 500, 525, 550,
-            575, 600, 625
-    };
-
     private ImageIcon foodImage;
 
-    private Random random = new Random();
-    private int xPos = random.nextInt(34);
-    private int yPos = random.nextInt(23);
-
-    private Timer timer;
-    private int delay = 100;
-
-    private int score = 0;
-
+    /* Constructor */
     public Gameplay() {
         addKeyListener(this);
         setFocusable(true);
@@ -55,6 +58,8 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         timer.start();
     }
 
+    /* Methods/Functions */
+    //Paints/Draws on the Panel
     public void paint(Graphics g) {
 
         if(moves == 0) {
@@ -145,6 +150,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         g.dispose();
     }
 
+    //ActionListener Method - actionPerformed
     @Override
     public void actionPerformed(ActionEvent e) {
         timer.start();
@@ -218,11 +224,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         }
     }
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-        //LEAVE EMPTY
-    }
-
+    //KeyListener Method - keyPressed
     @Override
     public void keyPressed(KeyEvent e) {
         if(e.getKeyCode() == KeyEvent.VK_SPACE) {
@@ -270,6 +272,11 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        //LEAVE EMPTY
+        //LEAVE EMPTY / NOT USED
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        //LEAVE EMPTY / NOT USED
     }
 }
