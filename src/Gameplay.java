@@ -27,10 +27,9 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
     //Integers
     private int snakeLength = 3; //Starting Length of the Snake = 3
-    private int moves = 0;
     private int xPos = random.nextInt(foodXPos.length);
     private int yPos = random.nextInt(foodYPos.length);
-    private int delay = 100;
+    private int moves = 0;
     private int score = 0;
 
     //Booleans
@@ -54,7 +53,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
-        timer = new Timer(delay, this);
+        timer = new Timer(100, this);
         timer.start();
     }
 
@@ -266,6 +265,9 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
                 left = false;
                 up = false;
                 down = true;
+            }
+            if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                //PAUSE
             }
         }
     }
