@@ -4,8 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Gameplay extends JPanel implements KeyListener, ActionListener {
@@ -26,6 +24,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     private ImageIcon upMouth;
     private ImageIcon downMouth;
     private ImageIcon snakeImage;
+    private ImageIcon titleImage;
 
     private int[] foodXPos = {
             25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 475, 500, 525, 550,
@@ -45,7 +44,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     private Timer timer;
     private int delay = 100;
 
-    private ImageIcon titleImage;
+    private int score = 0;
 
     public Gameplay() {
         addKeyListener(this);
@@ -79,6 +78,14 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         g.setColor(Color.BLACK);
         g.fillRect(25, 75, 850, 575);
 
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("arial", Font.PLAIN, 14));
+        g.drawString("Score: " + score, 780, 30);
+
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("arial", Font.PLAIN, 14));
+        g.drawString("Length: " + snakeLength, 780, 50);
+
         rightMouth = new ImageIcon("/Users/benjaminwyss/Documents/GitHub/Snake/rightmouth.png");
         rightMouth.paintIcon(this, g, snakeXLength[0], snakeYLength[0]);
 
@@ -109,6 +116,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
         if ((foodXPos[xPos] == snakeXLength[0] && foodYPos[yPos] == snakeYLength[0])) {
             snakeLength++;
+            score++;
             xPos = random.nextInt(foodXPos.length);
             yPos = random.nextInt(foodYPos.length);
         }
