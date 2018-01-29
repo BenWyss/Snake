@@ -123,6 +123,22 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
         foodImage.paintIcon(this, g, foodXPos[xPos], foodYPos[yPos]);
 
+        for (int c = 1; c < snakeLength; c++) {
+            if (snakeXLength[c] == snakeXLength[0] && snakeYLength[c] == snakeYLength[0]) {
+                right = false;
+                left = false;
+                up = false;
+                down = false;
+
+                g.setColor(Color.WHITE);
+                g.setFont(new Font("arial", Font.BOLD, 50));
+                g.drawString("Game Over", 310, 300);
+
+                g.setFont(new Font("arial", Font.BOLD, 50));
+                g.drawString("Press Spacebar to Try Again", 100, 360);
+            }
+        }
+
         g.dispose();
     }
 
@@ -206,6 +222,12 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        if(e.getKeyCode() == KeyEvent.VK_SPACE) {
+            moves = 0;
+            score = 0;
+            snakeLength = 3;
+            repaint();
+        }
         if(e.getKeyCode() == KeyEvent.VK_RIGHT && !left) {
             moves++;
             right = true;
