@@ -4,6 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
@@ -22,11 +25,25 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     private ImageIcon leftMouth;
     private ImageIcon upMouth;
     private ImageIcon downMouth;
+    private ImageIcon snakeImage;
+
+    private int[] foodXPos = {
+            25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 475, 500, 525, 550,
+            575, 600, 625, 650, 675, 700, 725, 750, 775, 800, 825, 850
+    };
+    private int[] foodYPos = {
+            75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 475, 500, 525, 550,
+            575, 600, 625
+    };
+
+    private ImageIcon foodImage;
+
+    private Random random = new Random();
+    private int xPos = random.nextInt(34);
+    private int yPos = random.nextInt(23);
 
     private Timer timer;
     private int delay = 100;
-
-    private ImageIcon snakeImage;
 
     private ImageIcon titleImage;
 
@@ -41,13 +58,13 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     public void paint(Graphics g) {
 
         if(moves == 0) {
-            snakeXLength[2] = 50;
-            snakeXLength[1] = 75;
-            snakeXLength[0] = 100;
+            snakeXLength[2] = 400;
+            snakeXLength[1] = 425;
+            snakeXLength[0] = 450;
 
-            snakeYLength[2] = 100;
-            snakeYLength[1] = 100;
-            snakeYLength[0] = 100;
+            snakeYLength[2] = 350;
+            snakeYLength[1] = 350;
+            snakeYLength[0] = 350;
         }
 
         g.setColor(Color.WHITE);
@@ -87,6 +104,16 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
                 snakeImage.paintIcon(this, g, snakeXLength[i], snakeYLength[i]);
             }
         }
+
+        foodImage = new ImageIcon("/Users/benjaminwyss/Documents/GitHub/Snake/food.png");
+
+        if ((foodXPos[xPos] == snakeXLength[0] && foodYPos[yPos] == snakeYLength[0])) {
+            snakeLength++;
+            xPos = random.nextInt(foodXPos.length);
+            yPos = random.nextInt(foodYPos.length);
+        }
+
+        foodImage.paintIcon(this, g, foodXPos[xPos], foodYPos[yPos]);
 
         g.dispose();
     }
