@@ -51,7 +51,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     private ImageIcon foodImage = new ImageIcon("/Users/benjaminwyss/Documents/GitHub/Snake/food.png");
 
     /* Constructor */
-    private Gameplay() {
+    public Gameplay() {
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
