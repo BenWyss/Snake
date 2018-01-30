@@ -1,3 +1,5 @@
+package Snake;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -40,16 +42,16 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     private boolean collisionDetected = false; //Self Collision (True or False)
 
     //ImageIcons
-    private ImageIcon rightMouth;
-    private ImageIcon leftMouth;
-    private ImageIcon upMouth;
-    private ImageIcon downMouth;
-    private ImageIcon snakeImage;
-    private ImageIcon titleImage;
-    private ImageIcon foodImage;
+    private ImageIcon rightMouth = new ImageIcon("/Users/benjaminwyss/Documents/GitHub/Snake/rightmouth.png");
+    private ImageIcon leftMouth = new ImageIcon("/Users/benjaminwyss/Documents/GitHub/Snake/leftmouth.png");
+    private ImageIcon upMouth = new ImageIcon("/Users/benjaminwyss/Documents/GitHub/Snake/upmouth.png");
+    private ImageIcon downMouth = new ImageIcon("/Users/benjaminwyss/Documents/GitHub/Snake/downmouth.png");
+    private ImageIcon snakeImage = new ImageIcon("/Users/benjaminwyss/Documents/GitHub/Snake/snakeimage.png");
+    private ImageIcon titleImage = new ImageIcon("/Users/benjaminwyss/Documents/GitHub/Snake/snaketitle.jpg");
+    private ImageIcon foodImage = new ImageIcon("/Users/benjaminwyss/Documents/GitHub/Snake/food.png");
 
     /* Constructor */
-    public Gameplay() {
+    private Gameplay() {
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
@@ -74,7 +76,6 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         g.setColor(Color.WHITE);
         g.drawRect(24, 10, 851, 55);
 
-        titleImage = new ImageIcon("/Users/benjaminwyss/Documents/GitHub/Snake/snaketitle.jpg");
         titleImage.paintIcon(this, g, 25, 11);
 
         g.setColor(Color.WHITE);
@@ -91,34 +92,25 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         g.setFont(new Font("arial", Font.PLAIN, 14));
         g.drawString("Length: " + snakeLength, 780, 50);
 
-        rightMouth = new ImageIcon("/Users/benjaminwyss/Documents/GitHub/Snake/rightmouth.png");
         rightMouth.paintIcon(this, g, snakeXLength[0], snakeYLength[0]);
 
         for (int i = 0; i < snakeLength; i++) {
             if (i==0 && right) {
-                rightMouth = new ImageIcon("/Users/benjaminwyss/Documents/GitHub/Snake/rightmouth.png");
                 rightMouth.paintIcon(this, g, snakeXLength[i], snakeYLength[i]);
             }
             if (i==0 && left) {
-                leftMouth = new ImageIcon("/Users/benjaminwyss/Documents/GitHub/Snake/leftmouth.png");
                 leftMouth.paintIcon(this, g, snakeXLength[i], snakeYLength[i]);
             }
             if (i==0 && up) {
-                upMouth = new ImageIcon("/Users/benjaminwyss/Documents/GitHub/Snake/upmouth.png");
                 upMouth.paintIcon(this, g, snakeXLength[i], snakeYLength[i]);
             }
             if (i==0 && down) {
-                downMouth = new ImageIcon("/Users/benjaminwyss/Documents/GitHub/Snake/downmouth.png");
                 downMouth.paintIcon(this, g, snakeXLength[i], snakeYLength[i]);
             }
             if (i!=0) {
-                snakeImage = new ImageIcon("/Users/benjaminwyss/Documents/GitHub/Snake/snakeimage.png");
                 snakeImage.paintIcon(this, g, snakeXLength[i], snakeYLength[i]);
             }
         }
-
-        foodImage = new ImageIcon("/Users/benjaminwyss/Documents/GitHub/Snake/food.png");
-
         if ((foodXPos[xPos] == snakeXLength[0] && foodYPos[yPos] == snakeYLength[0])) {
             snakeLength++;
             score++;

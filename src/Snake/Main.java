@@ -1,3 +1,5 @@
+package Snake;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -11,7 +13,7 @@ public class Main {
         frame.setBounds(10, 10, 905, 700);
         frame.setBackground(Color.WHITE);
         frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.add(gameplay);
         frame.setLocation(250, 50);
         frame.setVisible(true);
